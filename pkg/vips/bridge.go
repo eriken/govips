@@ -223,7 +223,8 @@ func isColorspaceIsSupported(image *C.VipsImage) bool {
 
 func vipsDetermineImageType(buf []byte) ImageType {
 	if len(buf) < 12 {
-		return ImageTypeUnknown
+		//return ImageTypeUnknown
+		return ImageTypeMagick
 	}
 	if buf[0] == 0xFF && buf[1] == 0xD8 && buf[2] == 0xFF {
 		return ImageTypeJPEG
@@ -237,7 +238,8 @@ func vipsDetermineImageType(buf []byte) ImageType {
 	if IsTypeSupported(ImageTypeTIFF) &&
 		((buf[0] == 0x49 && buf[1] == 0x49 && buf[2] == 0x2A && buf[3] == 0x0) ||
 			(buf[0] == 0x4D && buf[1] == 0x4D && buf[2] == 0x0 && buf[3] == 0x2A)) {
-		return ImageTypeTIFF
+		//return ImageTypeTIFF
+		return ImageTypeMagick
 	}
 	if IsTypeSupported(ImageTypePDF) && buf[0] == 0x25 && buf[1] == 0x50 && buf[2] == 0x44 && buf[3] == 0x46 {
 		return ImageTypePDF
@@ -248,6 +250,7 @@ func vipsDetermineImageType(buf []byte) ImageType {
 	if IsTypeSupported(ImageTypeSVG) && buf[0] == 0x3c && buf[1] == 0x3f && buf[2] == 0x78 && buf[3] == 0x6d {
 		return ImageTypeSVG
 	}
+	//return ImageTypeUnknown
 	return ImageTypeMagick
 }
 
