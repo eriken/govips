@@ -138,7 +138,7 @@ func vipsLoadFromBuffer(buf []byte) (*C.VipsImage, ImageType, error) {
 	imageBuf := unsafe.Pointer(&buf[0])
 
 	err := C.init_image(imageBuf, len, C.int(imageType), &image)
-	fmt.Printf("imageType: %d\n" err)
+	fmt.Printf("imageType: %d\n", err)
 	if err != 0 {
 		return nil, ImageTypeUnknown, handleVipsError()
 	}
