@@ -222,7 +222,8 @@ func isColorspaceIsSupported(image *C.VipsImage) bool {
 
 func vipsDetermineImageType(buf []byte) ImageType {
 	if len(buf) < 12 {
-		return ImageTypeUnknown
+		//return ImageTypeUnknown
+		return ImageTypeMagick
 	}
 	if buf[0] == 0xFF && buf[1] == 0xD8 && buf[2] == 0xFF {
 		return ImageTypeJPEG
@@ -247,7 +248,8 @@ func vipsDetermineImageType(buf []byte) ImageType {
 	if IsTypeSupported(ImageTypeSVG) && buf[0] == 0x3c && buf[1] == 0x3f && buf[2] == 0x78 && buf[3] == 0x6d {
 		return ImageTypeSVG
 	}
-	return ImageTypeUnknown
+	//return ImageTypeUnknown
+	return ImageTypeMagick
 }
 
 func vipsFlattenBackground(input *C.VipsImage, color Color) (*C.VipsImage, error) {
