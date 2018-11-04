@@ -124,7 +124,6 @@ func vipsLoadFromBuffer(buf []byte) (*C.VipsImage, ImageType, error) {
 
 	var image *C.VipsImage
 	imageType := vipsDetermineImageType(buf)
-	fmt.Printf("imageType: %d\n", imageType)
 	if imageType == ImageTypeUnknown {
 		if len(buf) > 2 {
 			log.Printf("Failed to understand image format size=%d %x %x %x", len(buf), buf[0], buf[1], buf[2])
@@ -138,7 +137,6 @@ func vipsLoadFromBuffer(buf []byte) (*C.VipsImage, ImageType, error) {
 	imageBuf := unsafe.Pointer(&buf[0])
 
 	err := C.init_image(imageBuf, len, C.int(imageType), &image)
-	fmt.Printf("success code: %d\n", err)
 	if err != 0 {
 		return nil, ImageTypeUnknown, handleVipsError()
 	}
