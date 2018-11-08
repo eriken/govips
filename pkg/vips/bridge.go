@@ -221,6 +221,9 @@ func isColorspaceIsSupported(image *C.VipsImage) bool {
 }
 
 func vipsDetermineImageType(buf []byte) ImageType {
+	if len(buf) == 0 {
+		return ImageTypeUnknown
+	}
 	if len(buf) < 12 {
 		//return ImageTypeUnknown
 		return ImageTypeMagick
